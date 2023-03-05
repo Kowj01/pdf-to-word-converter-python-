@@ -1,0 +1,22 @@
+# Initialize Aspose.Words Python object
+words_api = WordsApi("6185429e-17ce-468d-bb81-a51ac9d96c16","73a07e2fb010f559e482d854fe5a8f49")
+
+# Input PDF document
+inputFileName = 'kowj's_file_in_pdf.pdf'
+# Name of resultant Word document
+resultantFile = 'Converted.docx'
+
+# Upload PDF document to Cloud Storage
+words_api.upload_file(asposewordscloud.models.requests.UploadFileRequest(open(inputFileName, 'rb'), "", None))
+
+# Document export options
+request_save_options_data = asposewordscloud.SaveOptionsData(save_format='docx', file_name=resultantFile)
+
+# Create Document SaveAs request while passing input PDF name and word export options
+request = asposewordscloud.models.requests.SaveAsRequest(name=inputFileName,
+                                                             save_options_data=request_save_options_data,
+                                                             folder=None)
+# initiate the conversion operation
+result = words_api.words_api.save_as(request)
+# Print result in console
+print("Result {}".format(result))
